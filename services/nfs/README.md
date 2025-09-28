@@ -49,7 +49,7 @@ Edit **/etc/fstab** by adding <br>
 | `anongid=1001`     | GID to map clients to (`mediauser`)                        |
 | `sec=sys`          | Standard UNIX authentication                               |
 
-Desktop (NFS client) IP: 192.168.0.50
+Local Desktop IP (NFS client) : 192.168.0.50
 
 ## 5- Apply and Restart NFS (Laptop)
 `sudo exportfs -ra` <br>
@@ -62,10 +62,10 @@ Desktop (NFS client) IP: 192.168.0.50
 #### Mount NFS share
 `sudo mount -t nfs -o vers=4.2 LAPTOP_IP:/mnt/hdd/exports/media /mnt/media`
 
-Laptop (NFS server) IP: 192.168.0.60
+Local Laptop IP (NFS server) : 192.168.0.60
 
 ## 7- Make Mount Persistent (Desktop)
 `LAPTOP_IP:/mnt/hdd/exports/media  /mnt/media  nfs4  rw,hard,intr,vers=4.2,sec=sys  0 0`
 
-Laptop (NFS server) IP: 192.168.0.60
+Local Laptop IP (NFS server) : 192.168.0.60
 
