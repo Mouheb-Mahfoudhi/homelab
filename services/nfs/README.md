@@ -1,26 +1,43 @@
 # 📂 NFS Server Setup
 
-This guide documents how to configure an NFS server on the **laptop** to share media with the **desktop** (Jellyfin host).  
+This is how I configured an NFS server on my **laptop** to share a media directory on my spare 1 TB HDD with my **desktop** (Jellyfin host).  
 The setup ensures **centralized storage**, proper **user mapping**, and secure **NFSv4.2 mounts**.
 
 ---
 
-## 1️⃣ Install NFS Server (Laptop)
+## 🖴 Prepare the HDD (Laptop)
+**Identify the HDD partition**:
+`lsblk -f` <br>
+Example  <br> `sda  931.5G` <br>
+`└─sda1   ext4   linux-hdd   UUID=<my-hdd-UUID>` <br>
+**Create mount point and mount the disk:** <br>
+`sudo mkdir -p /mnt/hdd` <br>
+`sudo mount /dev/sda1 /mnt/hdd` <br>
+**Make the mount persistent:** <br>
+Edit **/etc/fstab** by adding <br>
+`UUID=<my-hdd-UUID>  /mnt/hdd  ext4  defaults  0 2` <br>
+**Create export directories (the directory nfs server shares):** <br>
+`sudo mkdir -p /mnt/hdd/exports/media`
+
+---
+
+## 1- Install NFS Server (Laptop)
 `sudo apt update && sudo apt install -y nfs-kernel-server`
 
-## 2️⃣ Create mediauser (Laptop)
+## 2- Create mediauser user and group (Laptop)
 #### Create group with fixed GID
-`sudo groupadd -g 1001 mediauser`
+`sudo groupadd -g 1002 mediauser`
 
 #### Create user with fixed UID and disable login
-`sudo useradd -M -s /usr/sbin/nologin -u 1001 -g 1001 mediauser`
+`sudo useradd -M -s /usr/sbin/nologin -u 1002 -g 1002 mediauser`
 
-## 3️⃣ Set Ownership and Permissions (Laptop)
-sudo chown -R mediauser:mediauser /mnt/hdd/exports/media
-sudo chmod -R 775 /mnt/hdd/exports/media
+## 3- Set Ownership and Permissions (Laptop)
+`sudo chown -R mediauser:mediauser /mnt/hdd/exports/media` <br>
+`sudo chmod -R 775 /mnt/hdd/exports/media`
 
-## 4️⃣ Configure NFS Exports (Laptop)
-/mnt/hdd/exports/media  192.168.0.50(rw,sync,no_subtree_check,all_squash,anonuid=1001,anongid=1001,sec=sys)
+## 4- Configure NFS Exports (Laptop)
+`sudo vim /etc/exports` <br>
+`/mnt/hdd/exports/media  Desktop_IP(rw,sync,no_subtree_check,all_squash,anonuid=1002,anongid=1002,sec=sys)`
 
 | Option             | Meaning                                                    |
 | ------------------ | ---------------------------------------------------------- |
@@ -32,21 +49,23 @@ sudo chmod -R 775 /mnt/hdd/exports/media
 | `anongid=1001`     | GID to map clients to (`mediauser`)                        |
 | `sec=sys`          | Standard UNIX authentication                               |
 
-Laptop (NFS server) IP: 192.168.0.60
-
 Desktop (NFS client) IP: 192.168.0.50
 
-## 5️⃣ Apply and Restart NFS (Laptop)
-`sudo exportfs -ra
-sudo systemctl restart nfs-kernel-server`
+## 5- Apply and Restart NFS (Laptop)
+`sudo exportfs -ra` <br>
+`sudo systemctl restart nfs-kernel-server`
 
-## 6️⃣ Mount the Share (Desktop)
+## 6- Mount the Share (Desktop)
 #### Create mount point
 `sudo mkdir -p /mnt/media`
 
 #### Mount NFS share
-`sudo mount -t nfs -o vers=4.2 192.168.0.60:/mnt/hdd/exports/media /mnt/media`
+`sudo mount -t nfs -o vers=4.2 LAPTOP_IP:/mnt/hdd/exports/media /mnt/media`
 
-## 7️⃣ Make Mount Persistent (Desktop)
-`192.168.0.60:/mnt/hdd/exports/media  /mnt/media  nfs4  rw,hard,intr,vers=4.2,sec=sys  0 0`
+Laptop (NFS server) IP: 192.168.0.60
+
+## 7- Make Mount Persistent (Desktop)
+`LAPTOP_IP:/mnt/hdd/exports/media  /mnt/media  nfs4  rw,hard,intr,vers=4.2,sec=sys  0 0`
+
+Laptop (NFS server) IP: 192.168.0.60
 
