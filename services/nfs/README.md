@@ -55,7 +55,12 @@ Local Desktop IP (NFS client) : 192.168.0.50
 `sudo exportfs -ra` <br>
 `sudo systemctl restart nfs-kernel-server`
 
-## 6- Mount the Share (Desktop)
+## 6- allow NFS through UFW (laptop)
+`sudo ufw allow from Desktop_IP to any port nfs`
+
+Local Desktop IP (NFS client) : 192.168.0.50
+
+## 7- Mount the Share (Desktop)
 #### Create mount point
 `sudo mkdir -p /mnt/media`
 
@@ -64,7 +69,7 @@ Local Desktop IP (NFS client) : 192.168.0.50
 
 Local Laptop IP (NFS server) : 192.168.0.60
 
-## 7- Make Mount Persistent (Desktop)
+## 8- Make Mount Persistent (Desktop)
 `LAPTOP_IP:/mnt/hdd/exports/media  /mnt/media  nfs4  rw,hard,intr,vers=4.2,sec=sys  0 0`
 
 Local Laptop IP (NFS server) : 192.168.0.60
