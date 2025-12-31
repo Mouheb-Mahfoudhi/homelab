@@ -2,7 +2,7 @@
 
 Personal homelab for cybersecurity, DevOps, and software engineering practice.  
 Runs several VMs on a Linux Mint desktop host, with containerized services, automation scripts, and VPN access.  
-A Linux Mint laptop runs an NFS server to provide centralized storage for the lab.
+A Linux Mint laptop runs an NFS server to provide centralized file sharing for the lab.
 
 ---
 
