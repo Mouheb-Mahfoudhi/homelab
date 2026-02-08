@@ -5,7 +5,7 @@ The setup ensures **centralized storage**, proper **user mapping**, and secure *
 
 ---
 
-## 🖴 Prepare the HDD (Laptop)
+## Prepare the HDD (Laptop)
 **Identify the HDD partition**:
 ```
 lsblk -f
