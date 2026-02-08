@@ -1,4 +1,4 @@
-# SSH Key-Based Authentication Setup
+# 🔐 SSH Key-Based Authentication Setup
 
 This is how I set up key-only SSH access between my desktop (client) and laptop (server) to allow secure connections within my homelab. <br>
 (The same process was repeated in reverse to allow SSH access in both directions.)
