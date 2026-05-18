@@ -1,4 +1,4 @@
-# 📂 NFS Server Setup
+# NFS Server Setup
 
 This is how I set up an NFS server on my **laptop** to share a media directory on my spare 1 TB HDD with my **desktop** (Jellyfin host).  
 The setup ensures **centralized storage**, proper **user mapping**, and secure **NFSv4.2 mounts**.
