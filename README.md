@@ -16,7 +16,7 @@ A Linux Mint laptop runs an NFS server to provide centralized file sharing for t
 | RAM             | 16 GB DDR4                     |
 | GPU             | Nvidia RTX 3060               |
 | Storage         | 1 TB SSD                       |
-| OS              | Linux Mint 22.1 Cinnamon      |
+| OS              | Fedora 44 KDE Plasma      |
 | Local IP        | 192.168.0.50/24               |
 | Virtualization  | KVM/QEMU + virt-manager       |
 
@@ -35,5 +35,5 @@ A Linux Mint laptop runs an NFS server to provide centralized file sharing for t
 | RAM             | 16 GB DDR4                     |
 | GPU             | AMD Radeon RX560X             |
 | Storage         | 500 GB SSD + 1 TB HDD          |
-| OS              | Linux Mint 22.1 Cinnamon      |
+| OS              | Fedora 44 KDE Plasma      |
 | Local IP        | 192.168.0.60/24               |
