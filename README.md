@@ -1,8 +1,8 @@
 # Homelab
 
 Personal homelab for cybersecurity, DevOps, and software engineering practice.  
-Runs several VMs on a Linux Mint desktop host, with containerized services, automation scripts, and VPN access.  
-A Linux Mint laptop runs an NFS server to provide centralized file sharing for the lab.
+Runs several VMs on a Fedora desktop host, with containerized services, automation scripts, and VPN access.  
+A Fedora laptop runs an NFS server to provide centralized file sharing for the lab.
 
 ---
 
@@ -19,13 +19,6 @@ A Linux Mint laptop runs an NFS server to provide centralized file sharing for t
 | OS              | Fedora 44 KDE Plasma      |
 | Local IP        | 192.168.0.50/24               |
 | Virtualization  | KVM/QEMU + virt-manager       |
-
-### Virtual Machines on Desktop
-
-| VM   | OS                | vCPU | RAM |
-|------|-----------------|-----|-----|
-| VM1  | Kali Linux 6.12.38 | 2   | 4 GB |
-| VM2  | Windows 11 24H2    | 4   | 8 GB |
 
 ### Laptop
 
